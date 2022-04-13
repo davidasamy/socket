@@ -1,0 +1,115 @@
+.actualgame {
+  display: none;
+}
+
+html {
+  background-color: black;
+}
+input {
+  font-family: "Courier";
+  width: 160px;
+  border: 0;
+  border-bottom: 2px solid;
+  outline: 0;
+  font-size: 20px;
+  color: white;
+  padding: 4px 0;
+  background: transparent;
+  text-align: center;
+  margin: 5px 5px;
+  border-color: gray;
+  transition: border-color 0.8s ease;
+
+}
+#typing {
+  color: white;
+}
+
+input:hover {
+  border-color: white;
+}
+
+input::placeholder {
+  transition: all 1s ease;
+  font-family: "Courier";
+  font-size: 20px;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+
+input:focus {
+  outline: none;
+  transition: color 1s ease;
+}
+
+button {
+    border: 0;
+    font-weight: bold;
+  font-size: 20px;
+  padding: 5px 5px;
+  margin-top: 40px;
+  background-color: gray;
+  border-radius: 5px;
+    transition: all 0.8s ease;
+
+}
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h2 {
+  color: lightgray;
+  text-align: center;
+  transition: all 0.8s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 40px;
+}
+
+
+
+
+button:hover {
+  background-color: lightgray;
+  font-weight: bold;
+  border-radius: 2px;
+  
+}
+
+#main-menu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 320px;
+  border: solid 2px gray;
+  border-radius: 10px;
+  transition: border-color 1s ease;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+#main-menu:hover {
+  border-color: lightgray;
+}
+
+
+.correct {
+  color: limegreen;
+}
+
+.incorrect {
+  color: red;
+}
+
+.normal {
+  color: white;
+}
+
+
+
+
