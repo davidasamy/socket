@@ -5,10 +5,6 @@
 html {
   background-color: black;
 }
-
-#practice {
-  
-}
 input {
   font-family: "Courier";
   width: 160px;
@@ -46,15 +42,13 @@ input:focus {
   outline: none;
   transition: color 1s ease;
 }
-#playGame {
-  margin-top: 40px;
-}
+
 button {
     border: 0;
     font-weight: bold;
   font-size: 20px;
   padding: 5px 5px;
-  
+  margin-top: 40px;
   background-color: gray;
   border-radius: 5px;
     transition: all 0.8s ease;
@@ -115,6 +109,12 @@ button:hover {
 .normal {
   color: white;
 }
+
+.random {
+  font-family: "Courier"
+}
+
+.
 
 
 
