@@ -1,11 +1,20 @@
 const socket = io(); // create new instance
-
+var multiplayer = true;
 
  // ask for what room the user wants to go
 window.onload=function(){
 
 
 document.getElementById("playGame").addEventListener('click', enter)
+
+  document.getElementById("practice").addEventListener('click', enter2)
+
+function enter2() {
+  
+  multiplayer = false;
+  enter();
+}
+
 let username = ""
 let room = ""
 function enter() {
@@ -26,8 +35,12 @@ function enter() {
     if (room = "") {
       room = "public"
     }
+    if (multiplayer == true) {
     socket.emit("joined", username, room);
-    
+    }
+  if (multiplayer == false) {
+  playIt(112354346);
+  }
   }
   
 }
@@ -50,6 +63,8 @@ readyButton = document.getElementById('ready')
 readyButton.addEventListener('click', () => {
   socket.emit("ready");
 })
+
+
 
 
 
@@ -142,7 +157,9 @@ function endGame() {
   document.getElementById('typehere').disabled = true
   document.getElementById('random').style.display = "none";
   document.getElementById("start").style.display = "block";
+  if (multiplayer == true) {
   socket.emit("score", { runs: fWORDS, game_id: game_id });
+  }
 }
 function initTyping() {
     const random = document.getElementById('random')
@@ -209,6 +226,10 @@ document.getElementById('typehere').addEventListener("input", initTyping);
   
 
 }
+
+
+
+  
 socket.on('start', function(game_id) {
   playIt(game_id);
 })
