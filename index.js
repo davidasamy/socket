@@ -12,17 +12,23 @@ const users = {};// create dictionary of users and their socket ids
 const rooms = {};
 const ready = {};
 const games = {};
+let nextroom = ""
+let queue = []
 function makeid(length) {
-    var result           = '';
+    var result1           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
+      result1 += characters.charAt(Math.floor(Math.random() * 
  charactersLength));
    }
-   return result;
+   return result1;
 }
 
+async function check(room) {
+  g = await (io.in(room).fetchSockets())
+  //console.log(g)
+}
 
 io.on("connection", socket => {
   socket.on("score", ({ runs, game_id }) => {
@@ -38,7 +44,7 @@ io.on("connection", socket => {
         
       let username = users[socket.id]["username"]; // get username of user
     let room = users[socket.id]["room"] // get room the user was in
-      console.log(games);
+      console.log(result);
     io.to(room).emit("gameover", {winner: result}); // tell the 
       
       rooms[room].forEach(element => games[game_id][element] = "")
@@ -48,6 +54,20 @@ io.on("connection", socket => {
   })
   socket.on("joined", (username, room) => { // when server recieves the "joined" message
     ready[username] = false
+    if (room == "public") {
+      if (nextroom == "") {
+        let g = makeid(15)
+        nextroom = g
+        room = g
+      }
+      else {
+        room = nextroom
+        nextroom = ""
+      }
+    }
+    
+    
+    
     socket.join(room); // join the room
     io.to(room).emit("joined", username); // tell the clients in the room that someone has joined
     users[socket.id] = {username:username,room:room}; 
@@ -57,16 +77,20 @@ io.on("connection", socket => {
       
     }
     rooms[room].push(username)
-    console.log(rooms);
+    
+  
     
   });
   socket.on("ready", () => { // when someone is ready to play
+    //console.log(users)
     username = users[socket.id]["username"]
     var room = rooms[users[socket.id]["room"]]
-    const allEqual = arr => arr.every( v => ready[v] === true )
-
     ready[username] = true
-    if (room.length == 2 && allEqual(room) == true) {
+    const allEqual = arr => arr.every( v => ready[v] === true )
+  
+    //console.log(ready)
+    if (room.length == 2 && allEqual(room) == true && users[socket.id]["room"] != "public") {
+      
       console.log('its 2!')
       room.forEach(element => ready[element] = false)
       
@@ -74,11 +98,11 @@ io.on("connection", socket => {
       games[game_id] = {}
       room.forEach(element => games[game_id][element] = "")
       
-      console.log(games)
-      console.log(rooms)
-      socket.join(room)
       
+      socket.join(room)
+    //console.log(users)
     let room2 = users[socket.id]["room"] // get room the user was in
+      check(room2)
     io.to(room2).emit("start", game_id);
     }
   });

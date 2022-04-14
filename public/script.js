@@ -1,18 +1,25 @@
 const socket = io(); // create new instance
-
+let ingame = False;
 
  // ask for what room the user wants to go
 window.onload=function(){
 
 
 document.getElementById("playGame").addEventListener('click', enter)
+  document.getElementById("user").onsubmit, function() {
+      alert('asdasdfd')
+
+  }
+
+
 let username = ""
 let room = ""
 function enter() {
+  alert('lets')
   nameinput = document.getElementById("user")
   roominput = document.getElementById("room")
 
-  if (nameinput.value == "" || roominput.value == "") {
+  if (nameinput.value == ""/* || roominput.value == ""*/) {
     alert('please fill in all fields')
   }
   else {
@@ -20,8 +27,12 @@ function enter() {
     document.querySelectorAll('.actualgame').forEach(function(el) {
    el.style.display = 'block';
 });
-    let username = nameinput.value
-    let room = roominput.value
+    let username = nameinput.value;
+    let room = roominput.value;
+    
+    if (room == "") {
+      room = "public"
+    }
     socket.emit("joined", username, room);
     
   }
@@ -49,6 +60,7 @@ readyButton.addEventListener('click', () => {
 
 
 socket.on('start', function(game_id) {
+
 var listOfWords = ["name", "hope", "love", "sin", "honor", "courage", "killer", "manage", "want", "account", "sell", "login", "hacker", "money", "coin", "genius", "legend", "troll", "funny", "silly", "happy", "car", "bot", "tab", "hut", "teacher", "friend", "father", "mother", "sun", "planet", "panel", "phone", "app", "send", "duplicate", "multiply", "add", "random", "number", "part", "section", "many", "few", "little", "huge", "insane", "bonkers", "spectacular", "magnificent", "terrible", "frequent", "incredible", "destroy", "create", "population", "culture", "significant", "wow", "amazing", "cool", "chill", "nice", "dog", "cat", "mouse", "elephant", "giant", "monkey", "apple", "banana", "rat", "keyboard", "type", "science", "class", "puppy", "pay", "boom", "comment", "hero", "smooth", "rough", "enough", "tough", "fluff", "scam", "army", "soldier", "muscle", "brave", "strong", "jump", "run", "hide", "decide", "prospect", "episode", "location", "religion"];
 
 let QQ = ""
@@ -199,8 +211,8 @@ document.getElementById('typehere').addEventListener("input", initTyping);
 
 })
 
-socket.on("gameover", winner => {
-  alert(`${winner} Won!`)
+socket.on("gameover", ({ winner }) => {
+  alert(`${winner} WON!`);
 })
   
 }
