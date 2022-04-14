@@ -7,7 +7,8 @@
   <body>
     
     <script src="/socket.io/socket.io.js"></script> <!-- use the library -->
-    <script src="/script.js"></script> <!-- use "script.js" file --> 
+    <script src="/script.js"></script>
+    <script src="/enter2.js"></script><!-- use "script.js" file --> 
     
     <div id="main-menu">
   <h2 class="center-block">typefight</h2>
@@ -16,7 +17,7 @@
     <input autocomplete="off" id="room" class="center-block" placeholder="room" ></input>
       </div>
 
-  <button id = "playGame" class="center-block">ENTER</button></div><div id="typing">
+  <button id = "playGame" class="center-block">ENTER</button><button id = "practice" class="center-block">PRACTICE</button></div><div id="typing">
 
     <button class="actualgame" id="ready">ready</button>
     <script src="script.js"></script>
@@ -24,7 +25,8 @@
     <h2 class="actualgame">typefight</h2>
     
     <p id="random"></p>
-    <button class="actualgame" id="start">Play</button>
+    <button id="start">Play</button>
+      <button id="start2">Play</button>
     <input autocomplete="off" style = "display: none" name="textbox" id="typehere" type="text" value="">
     <p id="stats"></p>
     </class>

@@ -48,7 +48,6 @@ button {
     font-weight: bold;
   font-size: 20px;
   padding: 5px 5px;
-  margin-top: 40px;
   background-color: gray;
   border-radius: 5px;
     transition: all 0.8s ease;
@@ -114,8 +113,29 @@ button:hover {
   font-family: "Courier"
 }
 
-.
+#playGame {
+    margin-top: 40px;
+}
+
+#practice {
+  margin-top: 20px;
+  font-size: 15px;
+}
 
 
+#typehere {
+  border: 0;
+  width: 0;
+  height: 0;
+}
 
+#start2 {
+  display: none;
+  border: solid 2px gray;
+  background-color: transparent;
+  color: gray;
+}
 
+#start {
+  display: none;
+}

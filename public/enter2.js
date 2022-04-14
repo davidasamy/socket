@@ -1,59 +1,15 @@
-const socket = io(); // create new instance
+document.getElementById("practice").addEventListener('click', enter2)
 
-
- // ask for what room the user wants to go
-window.onload=function(){
-
-
-document.getElementById("playGame").addEventListener('click', enter)
-let username = ""
-let room = ""
-function enter() {
-  nameinput = document.getElementById("user")
-  roominput = document.getElementById("room")
-
-  if (nameinput.value == ""/* || roominput.value == ""*/) {
-    alert('please fill in username field')
-  }
-  else {
-    document.getElementById("main-menu").style.display = "none"
-    document.querySelectorAll('.actualgame').forEach(function(el) {
+function enter2() {
+  document.getElementById("main-menu").style.display = "none"
+  document.querySelectorAll('.actualgame').forEach(function(el) {
    el.style.display = 'block';
 });
-    document.getElementById('start').style.display = 'block';
-    let username = nameinput.value
-    let room = roominput.value
-    if (room = "") {
-      room = "public"
-    }
-    socket.emit("joined", username, room);
-    
-  }
-  
+  document.getElementById('ready').style.display = 'none'
+  document.getElementById('start2').style.display = 'block';
 }
 
 
- // tell server the username and room of the person who joined
-
-socket.on("joined", user => { // when server tells client that someone has joined
-  //alert(user + " joined");
-});
-
-
-
-socket.on("leave", user => { // when server tells client that someone has left
-  alert(user + " left");
-});
-
-readyButton = document.getElementById('ready')
-
-readyButton.addEventListener('click', () => {
-  socket.emit("ready");
-})
-
-
-
-function playIt(game_id) {
 var listOfWords = ["name", "hope", "love", "sin", "honor", "courage", "killer", "manage", "want", "account", "sell", "login", "hacker", "money", "coin", "genius", "legend", "troll", "funny", "silly", "happy", "car", "bot", "tab", "hut", "teacher", "friend", "father", "mother", "sun", "planet", "panel", "phone", "app", "send", "duplicate", "multiply", "add", "random", "number", "part", "section", "many", "few", "little", "huge", "insane", "bonkers", "spectacular", "magnificent", "terrible", "frequent", "incredible", "destroy", "create", "population", "culture", "significant", "wow", "amazing", "cool", "chill", "nice", "dog", "cat", "mouse", "elephant", "giant", "monkey", "apple", "banana", "rat", "keyboard", "type", "science", "class", "puppy", "pay", "boom", "comment", "hero", "smooth", "rough", "enough", "tough", "fluff", "scam", "army", "soldier", "muscle", "brave", "strong", "jump", "run", "hide", "decide", "prospect", "episode", "location", "religion"];
 
 let QQ = ""
@@ -63,7 +19,12 @@ let timer,
 maxTime = 10,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
+document.getElementById("random").addEventListener('click', focus)
 
+
+function focus() {
+  document.getElementById("typehere").focus();
+}
 function removeVal(array, value) {
   const index = array.indexOf(value);
 if (index > -1) {
@@ -93,13 +54,7 @@ var runs = 0;
 
 
 
-document.getElementById("start").addEventListener("click", begin);
-  
-
-  function focus() {
-    document.getElementById("typehere").focus();
-  }
-  document.getElementById('random').addEventListener('click', focus);
+document.getElementById("start2").addEventListener("click", begin);
 var num = 2;
 function begin() {
   runs = 0
@@ -107,13 +62,14 @@ function begin() {
   document.getElementById('typehere').value = ""
       document.getElementById('typehere').disabled = false
 
-  document.getElementById("start").style.display = "none";
+  document.getElementById("start2").style.display = "none";
   startTime = Date.now();
   document.getElementById("typehere").focus();
   startTime = Date.now()
   
   setTimeout(endGame, totalTime);
-  document.getElementById('typehere').style.display = "block";
+  document.getElementById('typehere').style.width = 0;
+  document.getElementById('typehere').style.opacity = 0;
   document.getElementById('random').style.display = "block";
   resetGame();
 } 
@@ -141,8 +97,7 @@ function endGame() {
   document.getElementById('typehere').style.display = "none";
   document.getElementById('typehere').disabled = true
   document.getElementById('random').style.display = "none";
-  document.getElementById("start").style.display = "block";
-  socket.emit("score", { runs: fWORDS, game_id: game_id });
+  document.getElementById("start2").style.display = "block";
 }
 function initTyping() {
     const random = document.getElementById('random')
@@ -207,15 +162,3 @@ function resetGame() {
 document.getElementById('typehere').addEventListener("input", initTyping);
 
   
-
-}
-socket.on('start', function(game_id) {
-  playIt(game_id);
-})
-
-socket.on("gameover", ({ winner }) => {
-  alert(`${winner} Won!`)
-})
-  
-}
-
